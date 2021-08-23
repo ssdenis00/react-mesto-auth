@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-
   const avatarRef = React.useRef();
 
   React.useEffect(() => {
@@ -18,7 +17,13 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   }
 
   return (
-    <PopupWithForm name="avatar" title="Обновить аватар" onSubmit={handleSubmit} onClose={onClose} isOpen={isOpen}>
+    <PopupWithForm
+      name="avatar"
+      title="Обновить аватар"
+      onSubmit={handleSubmit}
+      onClose={onClose}
+      isOpen={isOpen}
+    >
       <input
         type="url"
         id="avatar-link"
@@ -30,7 +35,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       />
       <span className="popup__form-error" id="avatar-link-error"></span>
     </PopupWithForm>
-  )
+  );
 }
 
 export default EditAvatarPopup;
