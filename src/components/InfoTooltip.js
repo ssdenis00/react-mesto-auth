@@ -16,9 +16,7 @@ function InfoTooltip(props) {
           }`}
         ></div>
         <h2 className="popup__title">
-          {props.tooltipState
-            ? "Вы успешно зарегистрировались!"
-            : "Что-то пошло не так! Попробуйте ещё раз."}
+          {props.tooltipState ? props.tooltipSuccess : props.tooltipFail}
         </h2>
       </div>
     </div>

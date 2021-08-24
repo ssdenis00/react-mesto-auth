@@ -8,7 +8,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Register from "./Register";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
 import apiAuth from "../utils/apiAuth";
@@ -34,23 +34,30 @@ function App() {
 
   const [tooltipState, setTooltipState] = useState(null);
 
+  const history = useHistory();
+
   useEffect(() => {
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (loggedIn) {
+      api
+        .getInitialCards()
+        .then((res) => {
+          setCards(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      apiAuth.checkToken(localStorage.getItem("token")).then((res) => {
-        setEmail(res.data.email);
-        setLoggedIn(true);
-      });
+      apiAuth
+        .checkToken(localStorage.getItem("token"))
+        .then((res) => {
+          setEmail(res.data.email);
+          setLoggedIn(true);
+        })
+        .catch((err) => console.log(err));
     }
   }, []);
 
@@ -159,13 +166,16 @@ function App() {
   }
 
   function handleLoginSubmit(data) {
-    apiAuth.login(data).then((token) => {
-      apiAuth.checkToken(token.token).then((res) => {
-        setEmail(res.data.email);
-      });
-      localStorage.setItem("token", token.token);
-      setLoggedIn(true);
-    });
+    apiAuth
+      .login(data)
+      .then((token) => {
+        apiAuth.checkToken(token.token).then((res) => {
+          setEmail(res.data.email);
+        });
+        localStorage.setItem("token", token.token);
+        setLoggedIn(true);
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleClickExit() {
@@ -179,6 +189,7 @@ function App() {
       .then(() => {
         setIsInfoTooltipOpen(true);
         setTooltipState(true);
+        history.push("/sing-in");
       })
       .catch(() => {
         setIsInfoTooltipOpen(true);
@@ -213,6 +224,8 @@ function App() {
           isOpen={isInfoTooltipOpen}
           onClose={closeAllPopups}
           tooltipState={tooltipState}
+          tooltipSuccess={"Вы успешно зарегистрировались!"}
+          tooltipFail={"Что-то пошло не так! Попробуйте ещё раз."}
         />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
@@ -247,6 +260,9 @@ function App() {
           >
             <Main />
           </ProtectedRoute>
+          <Route path="*">
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+          </Route>
         </Switch>
       </div>
     </CurrentUserContext.Provider>

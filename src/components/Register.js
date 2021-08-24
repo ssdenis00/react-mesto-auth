@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function Register({ onRegister }) {
@@ -22,41 +22,39 @@ function Register({ onRegister }) {
   };
 
   return (
-    <>
-      <main className="main">
-        <section className="authorization page__content">
-          <h1 className="authorization__title">Регистрация</h1>
-          <form
-            action="/"
-            className="authorization__form"
-            onSubmit={handleSubmit}
-          >
-            <div className="authorization__inputs">
-              <input
-                type="email"
-                value={emailValue}
-                onChange={handleChangeInputEmail}
-                className="authorization__input"
-                placeholder="Email"
-              />
-              <input
-                type="password"
-                value={passValue}
-                onChange={handleChangeInputPass}
-                className="authorization__input"
-                placeholder="Пароль"
-              />
-            </div>
-            <button type="submit" className="authorization__btn">
-              Зарегистрироваться
-            </button>
-          </form>
-          <NavLink to="/sign-in" className="authorization__link">
-            Уже зарегистрированы? Войти
-          </NavLink>
-        </section>
-      </main>
-    </>
+    <main className="main">
+      <section className="authorization page__content">
+        <h1 className="authorization__title">Регистрация</h1>
+        <form
+          action="/"
+          className="authorization__form"
+          onSubmit={handleSubmit}
+        >
+          <div className="authorization__inputs">
+            <input
+              type="email"
+              value={emailValue}
+              onChange={handleChangeInputEmail}
+              className="authorization__input"
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              value={passValue}
+              onChange={handleChangeInputPass}
+              className="authorization__input"
+              placeholder="Пароль"
+            />
+          </div>
+          <button type="submit" className="authorization__btn">
+            Зарегистрироваться
+          </button>
+        </form>
+        <Link to="/sign-in" className="authorization__link">
+          Уже зарегистрированы? Войти
+        </Link>
+      </section>
+    </main>
   );
 }
 

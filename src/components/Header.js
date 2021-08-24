@@ -1,4 +1,4 @@
-import { NavLink, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import logo from "../images/logo.svg";
 
@@ -23,13 +23,13 @@ function Header({ onExit, email }) {
           className={`login-info ${stateLoginInfo ? "login-info_active" : ""}`}
         >
           <p className="login-info__email">{email}</p>
-          <NavLink
+          <Link
             onClick={handleExitClick}
             className="login-info__link"
             to="/sign-in"
           >
             Выйти
-          </NavLink>
+          </Link>
         </div>
       </Route>
       <header className="header page__content">
@@ -49,24 +49,24 @@ function Header({ onExit, email }) {
               <p className="login-info__email login-info__email_type_desktop">
                 {email}
               </p>
-              <NavLink
+              <Link
                 onClick={handleExitClick}
                 className="login-info__link login-info__link_type_desktop"
                 to="/sign-in"
               >
                 Выйти
-              </NavLink>
+              </Link>
             </div>
           </Route>
           <Route path="/sign-up">
-            <NavLink className="header__link" to="/sign-in">
+            <Link className="header__link" to="/sign-in">
               Войти
-            </NavLink>
+            </Link>
           </Route>
           <Route path="/sign-in">
-            <NavLink className="header__link" to="/sign-up">
+            <Link className="header__link" to="/sign-up">
               Регистрация
-            </NavLink>
+            </Link>
           </Route>
         </Switch>
       </header>
