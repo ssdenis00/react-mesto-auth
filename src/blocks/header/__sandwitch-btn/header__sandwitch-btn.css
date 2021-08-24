@@ -7,3 +7,9 @@
   border: none;
   background: center / contain url("../../../images/menu-btn.svg") no-repeat;
 }
+
+@media (min-width: 768px) {
+  .header__sandwitch-btn {
+    display: none;
+  }
+}

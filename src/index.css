@@ -2,15 +2,16 @@
 
 @import url("./vendor/fonts/fonts.css");
 
-@import url("./blocks/main/main.css");
-
 @import url("./blocks/page/page.css");
 @import url("./blocks/page/__content/page__content.css");
 
 @import url("./blocks/login-info/login-info.css");
+@import url("./blocks/login-info/_type/login-info_type_desctop.css");
 @import url("./blocks/login-info/_active/login-info_active.css");
 @import url("./blocks/login-info/__email/login-info__email.css");
+@import url("./blocks/login-info/__email/_type/login-info__email_type_desktop.css");
 @import url("./blocks/login-info/__link/login-info__link.css");
+@import url("./blocks/login-info/__link/_type/login-info__link_type_desktop.css");
 
 @import url("./blocks/header/header.css");
 @import url("./blocks/header/__logo/header__logo.css");

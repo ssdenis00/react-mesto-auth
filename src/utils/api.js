@@ -15,86 +15,78 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this.#url}/users/me`, {
-      method: 'GET',
-      headers: this.#headers
-    })
-      .then(this.#getResponseData);
+      method: "GET",
+      headers: this.#headers,
+    }).then(this.#getResponseData);
   }
 
   setUserInfo(info) {
     return fetch(`${this.#url}/users/me`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this.#headers,
       body: JSON.stringify({
         name: info.name,
-        about: info.about
-      })
-    })
-      .then(this.#getResponseData);
+        about: info.about,
+      }),
+    }).then(this.#getResponseData);
   }
 
   getInitialCards() {
     return fetch(`${this.#url}/cards`, {
-      method: 'GET',
-      headers: this.#headers
-    })
-      .then(this.#getResponseData);
+      method: "GET",
+      headers: this.#headers,
+    }).then(this.#getResponseData);
   }
 
   addCard(card) {
     return fetch(`${this.#url}/cards`, {
-      method: 'POST',
+      method: "POST",
       headers: this.#headers,
       body: JSON.stringify({
         name: card.name,
-        link: card.link
-      })
-    })
-      .then(this.#getResponseData);
+        link: card.link,
+      }),
+    }).then(this.#getResponseData);
   }
 
   changeAvatar(data) {
     return fetch(`${this.#url}/users/me/avatar`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this.#headers,
       body: JSON.stringify({
-        avatar: data.avatar
-      })
-    })
-      .then(this.#getResponseData);
+        avatar: data.avatar,
+      }),
+    }).then(this.#getResponseData);
   }
 
   deleteCard(cardId) {
     return fetch(`${this.#url}/cards/${cardId}`, {
-      method: 'DELETE',
-      headers: this.#headers
-    })
-      .then(this.#getResponseData);
+      method: "DELETE",
+      headers: this.#headers,
+    }).then(this.#getResponseData);
   }
 
   changeLikeCardStatus(cardId, isLiked) {
     if (isLiked) {
       return fetch(`${this.#url}/cards/likes/${cardId}`, {
-        method: 'PUT',
-        headers: this.#headers
-      })
-        .then(this.#getResponseData);
+        method: "PUT",
+        headers: this.#headers,
+      }).then(this.#getResponseData);
     } else {
       return fetch(`${this.#url}/cards/likes/${cardId}`, {
-        method: 'DELETE',
-        headers: this.#headers
-      })
-        .then(this.#getResponseData);
+        method: "DELETE",
+        headers: this.#headers,
+      }).then(this.#getResponseData);
     }
   }
 }
 
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-25',
+  url: "https://mesto.nomoreparties.co/v1/cohort-25",
   headers: {
-    authorization: '374fcf1a-996b-4e35-88d8-3be82638086e',
-    'Content-Type': 'application/json'
-  }
+    authorization: "374fcf1a-996b-4e35-88d8-3be82638086e",
+    "Content-Type": "application/json",
+  },
 });
 
 export default api;

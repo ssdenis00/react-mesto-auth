@@ -2,7 +2,7 @@ import { NavLink, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import logo from "../images/logo.svg";
 
-function Header() {
+function Header({ onExit, email }) {
   const [stateLoginInfo, setStateLoginInfo] = useState(false);
 
   const handleToggleSandwitchBtn = () => {
@@ -11,14 +11,23 @@ function Header() {
     });
   };
 
+  const handleExitClick = () => {
+    onExit();
+    setStateLoginInfo(false);
+  };
+
   return (
     <>
       <Route exact path="/">
         <div
           className={`login-info ${stateLoginInfo ? "login-info_active" : ""}`}
         >
-          <p className="login-info__email">email@mail.com</p>
-          <NavLink className="login-info__link" to="/sing-in">
+          <p className="login-info__email">{email}</p>
+          <NavLink
+            onClick={handleExitClick}
+            className="login-info__link"
+            to="/sign-in"
+          >
             Выйти
           </NavLink>
         </div>
@@ -35,14 +44,27 @@ function Header() {
                 stateLoginInfo ? "header__sandwith-btn_active" : ""
               }`}
             ></button>
+
+            <div className="login-info login-info_type_desktop">
+              <p className="login-info__email login-info__email_type_desktop">
+                {email}
+              </p>
+              <NavLink
+                onClick={handleExitClick}
+                className="login-info__link login-info__link_type_desktop"
+                to="/sign-in"
+              >
+                Выйти
+              </NavLink>
+            </div>
           </Route>
-          <Route path="/sing-up">
-            <NavLink className="header__link" to="/sing-in">
+          <Route path="/sign-up">
+            <NavLink className="header__link" to="/sign-in">
               Войти
             </NavLink>
           </Route>
-          <Route path="/sing-in">
-            <NavLink className="header__link" to="/sing-up">
+          <Route path="/sign-in">
+            <NavLink className="header__link" to="/sign-up">
               Регистрация
             </NavLink>
           </Route>

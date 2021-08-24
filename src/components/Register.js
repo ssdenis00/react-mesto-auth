@@ -1,22 +1,48 @@
 import { NavLink } from "react-router-dom";
-import InfoTooltip from "./InfoTooltip";
+import { useState } from "react";
 
-function Register() {
+function Register({ onRegister }) {
+  const [emailValue, setEmailValue] = useState("");
+  const [passValue, setPassValue] = useState("");
+
+  const handleChangeInputEmail = (e) => {
+    setEmailValue(e.target.value);
+  };
+
+  const handleChangeInputPass = (e) => {
+    setPassValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onRegister({
+      email: emailValue,
+      pass: passValue,
+    });
+  };
+
   return (
     <>
-      <InfoTooltip />
       <main className="main">
         <section className="authorization page__content">
           <h1 className="authorization__title">Регистрация</h1>
-          <form action="/" className="authorization__form">
+          <form
+            action="/"
+            className="authorization__form"
+            onSubmit={handleSubmit}
+          >
             <div className="authorization__inputs">
               <input
                 type="email"
+                value={emailValue}
+                onChange={handleChangeInputEmail}
                 className="authorization__input"
                 placeholder="Email"
               />
               <input
                 type="password"
+                value={passValue}
+                onChange={handleChangeInputPass}
                 className="authorization__input"
                 placeholder="Пароль"
               />
@@ -25,7 +51,7 @@ function Register() {
               Зарегистрироваться
             </button>
           </form>
-          <NavLink to="/sing-in" className="authorization__link">
+          <NavLink to="/sign-in" className="authorization__link">
             Уже зарегистрированы? Войти
           </NavLink>
         </section>

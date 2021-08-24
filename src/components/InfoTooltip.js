@@ -8,8 +8,18 @@ function InfoTooltip(props) {
           aria-label="закрыть всплывающее окно"
           onClick={props.onClose}
         ></button>
-        <div className="popup__info-tooltip"></div>
-        <h2 className="popup__title">{props.title}</h2>
+        <div
+          className={`popup__info-tooltip ${
+            props.tooltipState
+              ? "popup__info-tooltip_type_success"
+              : "popup__info-tooltip_type_fail"
+          }`}
+        ></div>
+        <h2 className="popup__title">
+          {props.tooltipState
+            ? "Вы успешно зарегистрировались!"
+            : "Что-то пошло не так! Попробуйте ещё раз."}
+        </h2>
       </div>
     </div>
   );
